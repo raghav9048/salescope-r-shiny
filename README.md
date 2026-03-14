@@ -6,7 +6,7 @@ Salescope is an interactive dashboard that helps e-commerce businesses understan
 
 ## Deployments
 
-A stable deployment from the `main` branch can be viewed at  [https://connect.posit.cloud/raghav007/content/019ceae0-d475-41e0-a674-ea9bc7477980]
+A stable deployment from the `main` branch can be viewed at [https://019ceae0-d475-41e0-a674-ea9bc7477980.share.connect.posit.cloud/]
 
 
 ## Dataset
