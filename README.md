@@ -1,0 +1,1 @@
+# salescope-r-shiny
