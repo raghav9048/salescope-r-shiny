@@ -2707,7 +2707,13 @@
       "checksum": "0412be33e3539ab0ac385cc9cd88dd18"
     },
     "salescope/app.R": {
-      "checksum": "e3761d54ad602bec820462668d1c7341"
+      "checksum": "eb7bb91cba8ff02684ffb90f944ad04d"
+    },
+    "salescope/data/sales_and_customer_insights.csv": {
+      "checksum": "2085e16d126dc0b4632e0e5f260b3c2a"
+    },
+    "salescope/README.md": {
+      "checksum": "4674c34a3438f2a765641683624d6cc5"
     }
   },
   "users": null
