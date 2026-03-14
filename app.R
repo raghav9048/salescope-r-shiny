@@ -7,14 +7,6 @@ library(bsicons)
 library(plotly)
 
 # Used LLM to create plot and also for output syntax.
-#loading data
-library(shiny)
-library(bslib)
-library(ggplot2)
-library(dplyr)
-library(readr)
-library(bsicons)
-library(plotly)
 
 # Loading data
 search_paths <- c("data", "../data", "./")
