@@ -39,7 +39,7 @@ conda activate Salescope
 The dataset is already included in the repository at `data/raw/sales_and_customer_insights.csv`. You can verify it exists by checking:
 
 ```bash
-ls data/raw/
+ls data/
 ```
 
 ### 4. Install Required R Packages
