@@ -22,6 +22,7 @@ Follow these steps to set up and run the Salescope dashboard on your local machi
 
 ```bash
 git clone https://github.com/raghav9048/salescope-r-shiny.git
+cd salescope-r-shiny
 ```
 
 ### 2. Create the Environment
@@ -41,13 +42,19 @@ The dataset is already included in the repository at `data/raw/sales_and_custome
 ls data/raw/
 ```
 
-### 4. Run the Dashboard
+### 4. Install Required R Packages
+Open R or RStudio and run:
+
+```R
+install.packages(c("shiny", "bslib", "ggplot2", "dplyr", "readr", "bsicons", "plotly"))
+```
+
+### 5. Run the Dashboard
 
 Start the Shiny dashboard application:
 
 # Make sure you're in the project root directory
 # Start R
-R
 # Then, run 
 shiny::runApp()
 
