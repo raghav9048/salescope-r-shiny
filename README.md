@@ -53,9 +53,9 @@ install.packages(c("shiny", "bslib", "ggplot2", "dplyr", "readr", "bsicons", "pl
 
 Start the Shiny dashboard application:
 
-### Make sure you're in the project root directory
-### Start R
-### Then, run 
+Make sure you're in the project root directory
+Start R
+Then, run 
 shiny::runApp()
 
 The dashboard will automatically open in your default web browser. If it does not open automatically, navigate to the URL shown in the terminal (typically `http://127.0.0.1:8000`).
