@@ -53,10 +53,12 @@ install.packages(c("shiny", "bslib", "ggplot2", "dplyr", "readr", "bsicons", "pl
 
 Start the Shiny dashboard application:
 
-Make sure you're in the project root directory
-Start R
-Then, run 
+```R
+# 1. Open your RStudio project (salescope.Rproj)
+# 2. Open app.R
+# 3. Run the following in the R Console:
 shiny::runApp()
+```
 
 The dashboard will automatically open in your default web browser. If it does not open automatically, navigate to the URL shown in the terminal (typically `http://127.0.0.1:8000`).
 
