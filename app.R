@@ -6,13 +6,24 @@ library(readr)
 library(bsicons)
 library(plotly)
 
+# Used LLM to create plot and also for output syntax.
 #loading data
-csv_path <- list.files(path = "data", pattern = "\\.csv$", full.names = TRUE)[1]
-if (is.na(csv_path)) {
-  csv_path <- list.files(path = "../data", pattern = "\\.csv$", full.names = TRUE)[1]
-}
-if (is.na(csv_path)) {
-  stop("Data file missing! Please ensure a CSV exists in the 'data' folder.")
+library(shiny)
+library(bslib)
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(bsicons)
+library(plotly)
+
+# Loading data
+search_paths <- c("data", "../data", "./")
+all_files <- list.files(path = search_paths, pattern = "\\.csv$", full.names = TRUE)
+
+if (length(all_files) > 0) {
+  csv_path <- all_files[1]
+} else {
+  stop("Critical Error: No CSV found. Please ensure your data folder is uploaded.")
 }
 
 sales_df <- read_csv(csv_path) %>%
@@ -37,12 +48,14 @@ ui <- page_sidebar(
     # Feature 1: Input (Date Range)
     dateRangeInput("date_range", "Filter by Launch Date:",
                    start = min(sales_df$Launch_Date, na.rm = TRUE),
-                   end   = max(sales_df$Launch_Date, na.rm = TRUE)),
+                   end   = max(sales_df$Launch_Date, na.rm = TRUE),
+                   min   = min(sales_df$Launch_Date, na.rm = TRUE),
+                   max   = max(sales_df$Launch_Date, na.rm = TRUE)),
     hr(),
     markdown("Adjust filters to update results in real-time.")
   ),
   
-  #Output (Value Boxes)
+  # Output (Value Boxes)
   layout_columns(
     value_box(
       title = "Avg Lifetime Value",
@@ -62,7 +75,7 @@ ui <- page_sidebar(
   layout_columns(
     card(
       card_header("LTV vs. Churn Probability (Hover for details)"),
-      plotlyOutput("scatter_plot", height = "450px"), # Changed to plotlyOutput
+      plotlyOutput("scatter_plot", height = "450px"),
       full_screen = TRUE
     ),
     card(
@@ -74,7 +87,7 @@ ui <- page_sidebar(
   )
 )
 
-#Server Logic
+# Server Logic
 server <- function(input, output, session) {
   
   # Feature 2: Reactive Calculation
@@ -95,7 +108,7 @@ server <- function(input, output, session) {
     return(df)
   })
   
-  # KPI 1:Average LTV
+  # KPI 1: Average LTV
   output$avg_ltv <- renderText({
     data <- filtered_data()
     if (nrow(data) == 0) return("$0.00")
@@ -109,6 +122,7 @@ server <- function(input, output, session) {
   })
   
   # Output 2: Interactive plotly scatter plot
+  #
   output$scatter_plot <- renderPlotly({
     df_plot <- filtered_data()
     if (nrow(df_plot) == 0) return(NULL)
@@ -116,7 +130,6 @@ server <- function(input, output, session) {
     p <- ggplot(df_plot, aes(x = Lifetime_Value, 
                              y = Churn_Probability, 
                              color = Region,
-                             # Custom text for the tooltip
                              text = paste("Customer ID:", Customer_ID, 
                                           "<br>LTV: $", format(round(Lifetime_Value, 2), big.mark=","),
                                           "<br>Churn Risk:", round(Churn_Probability, 3)))) +
@@ -129,7 +142,7 @@ server <- function(input, output, session) {
       layout(legend = list(orientation = "h", y = -0.2))
   })
   
-  # Output 3:summary table
+  # Output 3: Summary table
   output$summary_table <- renderTable({
     df_table <- filtered_data()
     if (nrow(df_table) == 0) return(NULL)
@@ -148,5 +161,5 @@ server <- function(input, output, session) {
   }, striped = TRUE, hover = TRUE, bordered = TRUE)
 }
 
-# Launchong app
+# Launching app
 shinyApp(ui, server)
